@@ -17,15 +17,15 @@
 		<h2> Numero de place à attribuer </h2><br/>
 
 		<?php 
-		$num_attente = $_GET['num_attente'];
+		$id_reservation = $_GET['id_reservation'];
 		$numplace = $_POST['numplace'];
 		$statut = 1;
 
 
-		$req2 = $bdd->prepare('UPDATE ATTENTE SET num_place = :num_place WHERE num_attente = :num_attente');
+		$req2 = $bdd->prepare('UPDATE reservation SET num_place = :num_place WHERE id_reservation = :id_reservation');
 		$req2->execute(array(
 				'num_place'=> $numplace,
-				'num_attente'=> $num_attente));
+				'id_reservation'=> $id_reservation));
 
 		echo 'L\'attribution de la place a été faite. <a href="reservation-attente.php">Retour aux attributions des places</a>';
 		?>

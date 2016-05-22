@@ -21,7 +21,7 @@
 		$dated = $_POST['dated'];
 		$datef = $_POST['datef'];
 
-			$req = $bdd->prepare('INSERT INTO attente(id_uti, dateDebut, dateFin) VALUES (:id_uti, :dateDebut, :dateFin)');
+			$req = $bdd->prepare('INSERT INTO reservation(id_uti, dateDebut, dateFin) VALUES (:id_uti, :dateDebut, :dateFin)');
 			$req -> execute(array(
 				'id_uti'=> $id_uti,
 				'dateDebut'=> $dated,

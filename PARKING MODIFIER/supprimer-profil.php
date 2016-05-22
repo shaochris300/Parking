@@ -18,7 +18,7 @@
 
 		<?php
 
-			$req5=$bdd->prepare('DELETE FROM attente WHERE id_uti = :id_uti');
+			$req5=$bdd->prepare('DELETE FROM reservation WHERE id_uti = :id_uti');
 			$req5->execute(array(
 				'id_uti'=>$_GET['id_uti']));
 

@@ -19,17 +19,17 @@
         $placen = $_POST['placen'];
         $valeur = -2;
 
-        $req = $bdd->prepare('UPDATE attente SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
+        $req = $bdd->prepare('UPDATE reservation SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
         $req->execute(array(
             'liste_attente'=> $valeur,
             'liste_attentee'=> $placen));
 
-        $req2 = $bdd->prepare('UPDATE attente SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
+        $req2 = $bdd->prepare('UPDATE reservation SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
         $req2->execute(array(
             'liste_attente'=>$placen,
             'liste_attentee'=> $placea));
 
-        $req3 = $bdd->prepare('UPDATE attente SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
+        $req3 = $bdd->prepare('UPDATE reservation SET liste_attente = :liste_attente WHERE liste_attente = :liste_attentee');
         $req3->execute(array(
             'liste_attente'=>$placea,
             'liste_attentee'=>$valeur));

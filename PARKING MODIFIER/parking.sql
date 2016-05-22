@@ -1,8 +1,8 @@
-CREATE TABLE MEMBRE
+/*CREATE TABLE MEMBRE
 (id_membre int(5) NOT NULL AUTO_INCREMENT,
 nom varchar(25),
 prenom varchar(25),
-constraint pk_membre primary key(id_membre));
+constraint pk_membre primary key(id_membre));*/
 
 CREATE TABLE UTILISATEUR
 (id_uti int(5) NOT NULL AUTO_INCREMENT,
@@ -18,28 +18,28 @@ statut int(1),
 motcle varchar(20),
 constraint pk_uti primary key(id_uti));
 
-CREATE TABLE ATTENTE
-(num_attente int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE RESERVATION
+(id_reservation int(3) NOT NULL AUTO_INCREMENT,
 id_uti int(5) NOT NULL,
 dateDebut date NOT NULL,
 dateFin date NOT NULL,
 num_place int(2),
 liste_attente int(2),
-constraint pk_attente primary key(num_attente));
+constraint pk_reservation primary key(id_reservation));
 
 CREATE TABLE PLACE 
 (id_place int(2),
 constraint pk_place primary key(id_place));
 
-ALTER TABLE ATTENTE
-ADD CONSTRAINT FK_ATTENTE_UTI FOREIGN KEY(id_uti)
+ALTER TABLE RESERVATION
+ADD CONSTRAINT FK_RESERVATION_UTI FOREIGN KEY(id_uti)
 REFERENCES UTILISATEUR(id_uti);
 
-ALTER TABLE ATTENTE
-ADD CONSTRAINT FK_ATTENTE_PL FOREIGN KEY(num_place)
+ALTER TABLE RESERVATION
+ADD CONSTRAINT FK_RESERVATION_PL FOREIGN KEY(num_place)
 REFERENCES PLACE(id_place);
 
-INSERT INTO membre VALUES
+/*INSERT INTO membre VALUES
 (1, 'mo', 'david'),
 (2, 'hoi', 'patrick'),
 (3, 'gilbert', 'kevin'),
@@ -56,7 +56,7 @@ INSERT INTO membre VALUES
 (14, 'soirot', 'eliot'),
 (15, 'hazard', 'leo'),
 (16, 'henin', 'jerome'),
-(17, 'khan', 'noor');
+(17, 'khan', 'noor');*/
 
 INSERT INTO utilisateur VALUES
 (5, 'kevin', 123456, 'gilbert', 'kevin', '5 rue de la tour', 75018, 612345678, 'kevin1@hotmail.com', 1, 'carotte'),
@@ -71,7 +71,7 @@ INSERT INTO utilisateur VALUES
 (22, 'morgan', 123456, 'robert', 'morgan', '4 rue suzanne masson', 93100, 654151231, 'morgan@hotmail.com', 0, 'petite'),
 (23, 'eliot', 123456, 'soirot', 'eliot', '8 rue de la chappelle', 75014, 689745221, 'eliot@hotmail.fr', 0, 'grand');
 
-INSERT INTO attente VALUES
+INSERT INTO reservation VALUES
 (26, 18, '2016-01-08', '2016-01-16', 4, 0),
 (29, 17, '2015-12-09', '2015-12-20', 1, -1),
 (28, 17, '2016-02-10', '2016-02-12', 6, 0),

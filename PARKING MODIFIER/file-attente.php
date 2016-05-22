@@ -17,10 +17,10 @@
 		<h2> Numero de place à attribuer </h2><br/>
 		<?php
 
-		$numattente = $_GET['num_attente'];
+		$idreservation= $_GET['id_reservation'];
 		$compteur = 0;
 
-		$req= $bdd->query('SELECT * FROM ATTENTE');
+		$req= $bdd->query('SELECT * FROM RESERVATION');
 		while($donnees = $req->fetch())
 		{
 			if(isset($donnees['liste_attente']) && $donnees['liste_attente'] != -1 && $donnees['liste_attente'] != 0)
@@ -31,10 +31,10 @@
 
 		$compteur = $compteur +1;
 
-		$req2 = $bdd->prepare('UPDATE ATTENTE SET liste_attente = :liste_attente WHERE num_attente = :num_attente');
+		$req2 = $bdd->prepare('UPDATE RESERVATION SET liste_attente = :liste_attente WHERE id_reservation = :id_reservation');
 		$req2->execute(array(
 			'liste_attente'=>$compteur,
-			'num_attente'=>$numattente));
+			'id_reservation'=>$idreservation));
 
 		echo'La réservation a bien été ajouté à la liste d\'attente. <a href="reservation-attente.php">Retour aux attributions des places</a>';
 		?>

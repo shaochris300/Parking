@@ -26,14 +26,6 @@
 		$verite = false;
 		$statut = 0;
 
-		$req = $bdd->query('SELECT * FROM MEMBRE');
-		while($donnees = $req->fetch())
-		{
-			if($donnees['nom'] == $nom && $donnees['prenom'] == $prenom)
-			{
-				$verite = true;
-			}
-		}
 
 		$req2 = $bdd->query('SELECT * FROM UTILISATEUR');
 		while($donnees2 = $req2->fetch())

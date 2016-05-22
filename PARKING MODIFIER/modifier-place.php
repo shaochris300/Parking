@@ -23,11 +23,11 @@
         </tr>
 
         <?php
-        $numattente = $_GET['num_attente'];
+        $numattente = $_GET['id_reservation'];
 
-        $req = $bdd->prepare('SELECT * FROM attente WHERE num_attente = :num_attente');
+        $req = $bdd->prepare('SELECT * FROM reservation WHERE id_reservation = :id_reservation');
         $req->execute(array(
-            'num_attente'=>$numattente));
+            'id_reservation'=>$numattente));
 
         while($donnees = $req->fetch())
         {

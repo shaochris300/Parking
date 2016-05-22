@@ -19,7 +19,7 @@
 		if($_SESSION['nom'] == 'shao' && $_SESSION['prenom'] == 'christophe')
 		{
 			$verite = false;
-			$req11 = 'SELECT * FROM attente';
+			$req11 = 'SELECT * FROM reservation';
 
 			$req = $bdd->query($req11);
 			while($donnees = $req->fetch())
@@ -59,8 +59,8 @@
 										<td>'.$donnees2['prenom'].'</td>
 										<td>'.$donnees['dateDebut'].'</td>
 										<td>'.$donnees['dateFin'].'</td>
-										<td><a href = "attribution-place.php?num_attente='.$donnees['num_attente'].'">Accepter</a></td>
-										<td><a href = "reservation-refus.php?num_attente='.$donnees['num_attente'].'">Refuser</a></td>
+										<td><a href = "attribution-place.php?id_reservation='.$donnees['id_reservation'].'">Accepter</a></td>
+										<td><a href = "reservation-refus.php?id_reservation='.$donnees['id_reservation'].'">Refuser</a></td>
 				  					</tr>';
 						}
 					}
@@ -74,7 +74,7 @@
 			$verite = false;
 			$null = NULL;
 
-			$req = $bdd->prepare('SELECT * FROM attente WHERE id_uti=:id_uti');
+			$req = $bdd->prepare('SELECT * FROM reservation WHERE id_uti=:id_uti');
 			$req->execute(array(
 				'id_uti'=>$id_uti));
 			while($donnees = $req->fetch())
@@ -98,12 +98,12 @@
 						<td>Date début</td>
 						<td>Date fin</td>
 					</tr>';
-					$req =$bdd->prepare('SELECT * FROM ATTENTE WHERE id_uti = :id_uti AND num_place IS NULL AND liste_attente IS NULL');
+					$req =$bdd->prepare('SELECT * FROM reservation WHERE id_uti = :id_uti AND num_place IS NULL AND liste_attente IS NULL');
 					$req->execute(array(
 						'id_uti'=>$id_uti));
 					while($donnees = $req->fetch())
 					{
-								echo '<tr><td>'.$donnees['num_attente'].'</td>
+								echo '<tr><td>'.$donnees['id_reservation'].'</td>
 										<td>'.$donnees['dateDebut'].'</td>
 										<td>'.$donnees['dateFin'].'</td>
 				  					</tr>';

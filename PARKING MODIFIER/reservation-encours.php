@@ -26,7 +26,7 @@
         <?php
             $req22 ='SELECT * FROM UTILISATEUR';
             
-            $req = $bdd->query('SELECT * FROM ATTENTE WHERE num_place IS NOT NULL AND liste_attente = 0 ORDER BY num_place ASC');
+            $req = $bdd->query('SELECT * FROM reservation WHERE num_place IS NOT NULL AND liste_attente = 0 ORDER BY num_place ASC');
             while($donnees = $req->fetch())
             {
                     $req2 = $bdd->query($req22);
@@ -37,7 +37,7 @@
                             echo'<tr>
                                     <td>'.$donnees['num_place'].'</td>
                                     <td>'.$donnees2['nom'].'  '.$donnees2['prenom'].'</td>
-                                    <td><a href = "liberer-place.php?num_place='.$donnees['num_place'].'&num_attente='.$donnees['num_attente'].'">Liberer</a></td>
+                                    <td><a href = "liberer-place.php?num_place='.$donnees['num_place'].'&id_reservation='.$donnees['id_reservation'].'">Liberer</a></td>
                                 </tr>';
                         }
                     }
@@ -54,7 +54,7 @@
 
         <?php
 
-        $req =$bdd->query('SELECT * FROM attente WHERE liste_attente != -1 AND liste_attente != 0 ORDER BY liste_attente ASC');
+        $req =$bdd->query('SELECT * FROM reservation WHERE liste_attente != -1 AND liste_attente != 0 ORDER BY liste_attente ASC');
         while($donnees = $req->fetch())
         {
             $req2 = $bdd->query($req22);
@@ -65,7 +65,7 @@
                     echo'<tr>
                              <td>'.$donnees['liste_attente'].'</td>
                               <td>'.$donnees2['nom'].'  '.$donnees2['prenom'].'</td>
-                              <td><a href = "modifier-place.php?num_attente='.$donnees['num_attente'].'">Modifier</a></td>
+                              <td><a href = "modifier-place.php?id_reservation='.$donnees['id_reservation'].'">Modifier</a></td>
                          </tr>';
                 }
             }
@@ -85,7 +85,7 @@
         </tr>
         <?php
 
-        $req = $bdd->query('SELECT * FROM attente WHERE liste_attente = -1 ORDER BY num_place ASC');
+        $req = $bdd->query('SELECT * FROM reservation WHERE liste_attente = -1 ORDER BY num_place ASC');
         while($donnees = $req->fetch())
         {
             $req2 = $bdd->query($req22);
@@ -94,7 +94,7 @@
                 if($donnees2['id_uti'] == $donnees['id_uti'])
                 {
                     echo'<tr>
-                          <td>'.$donnees['num_attente'].'</td>
+                          <td>'.$donnees['id_reservation'].'</td>
                           <td>'.$donnees2['nom'].'  '.$donnees2['prenom'].'</td>
                           <td>'.$donnees['dateDebut'].'</td>
                           <td>'.$donnees['dateFin'].'</td>
@@ -118,14 +118,14 @@
             </tr>';
 
             
-            $req = $bdd->prepare('SELECT * FROM ATTENTE WHERE id_uti = :id_uti AND liste_attente = 0 ORDER BY num_place ASC');
+            $req = $bdd->prepare('SELECT * FROM reservation WHERE id_uti = :id_uti AND liste_attente = 0 ORDER BY num_place ASC');
             $req->execute(array(
                 'id_uti'=>$id_uti));
             while($donnees = $req->fetch())
             {
                     echo'<tr>
                             <td>'.$donnees['num_place'].'</td>
-                            <td>'.$donnees['num_attente'].'</td>
+                            <td>'.$donnees['id_reservation'].'</td>
                         </tr>';
             }
         ?>
@@ -138,14 +138,14 @@
         </tr>
 
         <?php
-            $req3 = $bdd->prepare('SELECT * FROM ATTENTE WHERE id_uti = :id_uti AND num_place IS NULL AND liste_attente IS NOT NULL ORDER BY liste_attente ASC');
+            $req3 = $bdd->prepare('SELECT * FROM reservation WHERE id_uti = :id_uti AND num_place IS NULL AND liste_attente IS NOT NULL ORDER BY liste_attente ASC');
             $req3->execute(array(
                 'id_uti'=>$id_uti));
             while($donnees3 = $req3->fetch())
             {
                      echo'<tr>
                         <td>'.$donnees3['liste_attente'].'</td>
-                         <td>'.$donnees3['num_attente'].'</td>
+                         <td>'.$donnees3['id_reservation'].'</td>
                      </tr>';
             }
             echo'</table>';
@@ -159,13 +159,13 @@
             <td>Numéro de place occupé</td>
         </tr>
         <?php
-            $req=$bdd->prepare('SELECT * FROM ATTENTE WHERE id_uti = :id_uti AND liste_attente = -1 ORDER BY liste_attente ASC');
+            $req=$bdd->prepare('SELECT * FROM reservation WHERE id_uti = :id_uti AND liste_attente = -1 ORDER BY liste_attente ASC');
             $req->execute(array(
                 'id_uti'=>$id_uti));
             while($donnees = $req->fetch())
             {
                   echo'<tr>
-                        <td>'.$donnees['num_attente'].'</td>
+                        <td>'.$donnees['id_reservation'].'</td>
                        <td>'.$donnees['dateDebut'].'</td>
                        <td>'.$donnees['dateFin'].'</td>
                        <td>'.$donnees['num_place'].'</td>

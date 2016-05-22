@@ -17,9 +17,9 @@
 		<h2> Les réservations en attentes </h2><br/>
 
 		<?php
-				$req = $bdd->prepare('DELETE FROM attente WHERE num_attente = :num_attente');
+				$req = $bdd->prepare('DELETE FROM reservation WHERE id_reservation = :id_reservation');
 				$req->execute(array(
-					'num_attente'=>$donnees['num_attente']));
+					'id_reservation'=>$donnees['id_reservation']));
 				echo 'La demande de reservation a bien été supprimer.<a href="reservation-attente.php">Retour à la liste de reservation</a>';
 		?>
 		</p>
